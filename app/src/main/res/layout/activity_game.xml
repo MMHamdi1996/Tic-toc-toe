@@ -55,19 +55,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt1"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt2"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
@@ -75,18 +75,18 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt3"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
@@ -97,19 +97,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt4"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt5"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
@@ -117,18 +117,18 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt6"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
+
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
@@ -139,19 +139,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt7"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt8"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
@@ -159,18 +158,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt9"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
                     android:onClick="btClick"
                     android:textColor="#000000"
                     android:textSize="48sp"
