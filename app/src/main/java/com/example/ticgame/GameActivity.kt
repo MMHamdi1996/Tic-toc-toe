@@ -142,6 +142,25 @@ class GameActivity : AppCompatActivity() {
             }
             dialog.show()
 
+
         }
+        else if (player1.size + player2.size == 9) {
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.winner_dialogue)
+            dialog.findViewById<TextView>(R.id.winnerResult).text = "بازی مساوی شد"
+            dialog.findViewById<Button>(R.id.exit).setOnClickListener {
+                val intent = Intent(this, StartGameActivity::class.java)
+                startActivity(intent)
+            }
+            dialog.findViewById<Button>(R.id.againGame).setOnClickListener {
+                val intent = Intent(this, GameActivity::class.java)
+                finish()
+                startActivity(intent)
+            }
+            dialog.show()
+        }
+
     }
 }
