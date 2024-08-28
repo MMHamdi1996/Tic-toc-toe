@@ -15,12 +15,12 @@ class ChooseModeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.oneNdGameButton.setOnClickListener {
-            val intent = Intent(this , ActivityOnePlayerGameBinding::class.java)
+            val intent = Intent(this , onePlayerGameActivity::class.java)
             startActivity(intent)
         }
 
         binding.twoNdGameButton.setOnClickListener {
-            val intent = Intent(this , ActivityTwoPlayerGameBinding::class.java)
+            val intent = Intent(this , twoPlayerGameActivity::class.java)
             startActivity(intent)
         }
     }
