@@ -3,8 +3,6 @@ package com.example.ticgame
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.lifecycleScope
 import com.example.ticgame.databinding.ActivityMainBinding
 import kotlinx.coroutines.delay
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(3000)
-            val intent = Intent(this@MainActivity , StartGameActivity::class.java)
+            val intent = Intent(this@MainActivity , ChooseModeActivity::class.java)
             startActivity(intent)
         }
 

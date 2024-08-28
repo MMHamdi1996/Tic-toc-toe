@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#CCCCCC" /> <!-- رنگ زمانی که دکمه فشرده شده -->
+            <corners android:radius="8dp" /> <!-- گرد کردن گوشه‌ها -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" /> <!-- رنگ پیش‌فرض دکمه -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector>
