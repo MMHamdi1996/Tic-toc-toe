@@ -18,63 +18,52 @@ class twoPlayerGameActivity : AppCompatActivity() {
     private val winningScore = 3
 
     private var activePlayer = 1
-    private var player1 = ArrayList<Int>()
-    private var player2 = ArrayList<Int>()
+    private val player1 = mutableListOf<Int>()
+    private val player2 = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityTwoPlayerGameBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityTwoPlayerGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // بهبود رابط کاربری
         setupUI()
     }
 
     private fun setupUI() {
-        // تنظیمات اولیه برای ظاهر بازی
-        // می‌توانید تم‌ها و رنگ‌های مختلف را تنظیم کنید
+        // تنظیمات ظاهری
         binding.root.setBackgroundResource(R.drawable.background) // اضافه کردن پس‌زمینه
 
         // تنظیمات دکمه‌ها
-        for (i in 1..9) {
-            val button = when (i) {
-                1 -> binding.bt1
-                2 -> binding.bt2
-                3 -> binding.bt3
-                4 -> binding.bt4
-                5 -> binding.bt5
-                6 -> binding.bt6
-                7 -> binding.bt7
-                8 -> binding.bt8
-                9 -> binding.bt9
-                else -> binding.bt1
+        val textSize = 36f // افزایش سایز متن
+        with(binding) {
+            val buttons = listOf(bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9)
+            buttons.forEach {
+                it.setBackgroundResource(R.drawable.default_button)
+                it.textSize = textSize
             }
-            button.setBackgroundResource(R.drawable.default_button)
-            button.textSize = 24f
         }
     }
 
     fun btClick(view: View) {
-        var cellId = 0
         val btSelected = view as Button
-
-        when (btSelected.id) {
-            binding.bt1.id -> cellId = 1
-            binding.bt2.id -> cellId = 2
-            binding.bt3.id -> cellId = 3
-            binding.bt4.id -> cellId = 4
-            binding.bt5.id -> cellId = 5
-            binding.bt6.id -> cellId = 6
-            binding.bt7.id -> cellId = 7
-            binding.bt8.id -> cellId = 8
-            binding.bt9.id -> cellId = 9
+        val cellId = when (btSelected.id) {
+            binding.bt1.id -> 1
+            binding.bt2.id -> 2
+            binding.bt3.id -> 3
+            binding.bt4.id -> 4
+            binding.bt5.id -> 5
+            binding.bt6.id -> 6
+            binding.bt7.id -> 7
+            binding.bt8.id -> 8
+            binding.bt9.id -> 9
+            else -> return
         }
 
         playGame(cellId, btSelected)
         checkWinner()
     }
 
-    fun playGame(cellId: Int, btSelected: Button) {
+    private fun playGame(cellId: Int, btSelected: Button) {
         if (activePlayer == 1) {
             btSelected.text = "X"
             btSelected.setBackgroundResource(R.drawable.playeronebox)
@@ -88,98 +77,86 @@ class twoPlayerGameActivity : AppCompatActivity() {
         }
         btSelected.isEnabled = false
 
-        // اضافه کردن انیمیشن ساده
+        // انیمیشن دکمه
         btSelected.animate().apply {
             duration = 200
             rotationYBy(360f)
         }.start()
     }
 
-    fun checkWinner() {
-        var winner = -1
+    private fun checkWinner() {
+        val winPatterns = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9),
+            listOf(1, 4, 7),
+            listOf(2, 5, 8),
+            listOf(3, 6, 9),
+            listOf(1, 5, 9),
+            listOf(3, 5, 7)
+        )
 
-        // بررسی تمام حالات برد
-        if (player1.contains(1) && player1.contains(2) && player1.contains(3)) winner = 1
-        if (player2.contains(1) && player2.contains(2) && player2.contains(3)) winner = 2
+        val winner = when {
+            winPatterns.any { pattern -> pattern.all { player1.contains(it) } } -> 1
+            winPatterns.any { pattern -> pattern.all { player2.contains(it) } } -> 2
+            else -> null
+        }
 
-        if (player1.contains(1) && player1.contains(4) && player1.contains(7)) winner = 1
-        if (player2.contains(1) && player2.contains(4) && player2.contains(7)) winner = 2
-
-        if (player1.contains(2) && player1.contains(5) && player1.contains(8)) winner = 1
-        if (player2.contains(2) && player2.contains(5) && player2.contains(8)) winner = 2
-
-        if (player1.contains(3) && player1.contains(6) && player1.contains(9)) winner = 1
-        if (player2.contains(3) && player2.contains(6) && player2.contains(9)) winner = 2
-
-        if (player1.contains(1) && player1.contains(5) && player1.contains(9)) winner = 1
-        if (player2.contains(1) && player2.contains(5) && player2.contains(9)) winner = 2
-
-        if (player1.contains(3) && player1.contains(5) && player1.contains(7)) winner = 1
-        if (player2.contains(3) && player2.contains(5) && player2.contains(7)) winner = 2
-
-        if (winner == 1) {
-            player1Score += 1
-            resetGame()
-
-            if (player1Score == winningScore) {
-                showFinalWinnerDialog("بازیکن شماره یک برنده نهایی شد")
-            } else {
-                Toast.makeText(this, "بازیکن شماره یک این دور رو برد", Toast.LENGTH_SHORT).show()
+        when (winner) {
+            1 -> {
+                player1Score++
+                if (player1Score == winningScore) {
+                    showFinalWinnerDialog("بازیکن شماره یک برنده نهایی شد")
+                } else {
+                    Toast.makeText(this, "بازیکن شماره یک این دور رو برد", Toast.LENGTH_SHORT).show()
+                }
+                resetGame()
             }
-
-        } else if (winner == 2) {
-            player2Score += 1
-            resetGame()
-
-            if (player2Score == winningScore) {
-                showFinalWinnerDialog("بازیکن شماره دو برنده نهایی شد")
-            } else {
-                Toast.makeText(this, "بازیکن شماره دو این دور رو برد", Toast.LENGTH_SHORT).show()
+            2 -> {
+                player2Score++
+                if (player2Score == winningScore) {
+                    showFinalWinnerDialog("بازیکن شماره دو برنده نهایی شد")
+                } else {
+                    Toast.makeText(this, "بازیکن شماره دو این دور رو برد", Toast.LENGTH_SHORT).show()
+                }
+                resetGame()
             }
-
-        } else if (player1.size + player2.size == 9) {
-            Toast.makeText(this, "بازی مساوی شد", Toast.LENGTH_SHORT).show()
-            resetGame()
+            else -> if (player1.size + player2.size == 9) {
+                Toast.makeText(this, "بازی مساوی شد", Toast.LENGTH_SHORT).show()
+                resetGame()
+            }
         }
     }
 
-    fun resetGame() {
+    private fun resetGame() {
         player1.clear()
         player2.clear()
         activePlayer = 1
 
-        for (i in 1..9) {
-            val button = when (i) {
-                1 -> binding.bt1
-                2 -> binding.bt2
-                3 -> binding.bt3
-                4 -> binding.bt4
-                5 -> binding.bt5
-                6 -> binding.bt6
-                7 -> binding.bt7
-                8 -> binding.bt8
-                9 -> binding.bt9
-                else -> binding.bt1
+        with(binding) {
+            val buttons = listOf(bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9)
+            buttons.forEach {
+                it.text = ""
+                it.isEnabled = true
+                it.setBackgroundResource(R.drawable.default_button)
+                it.textSize = 36f // تنظیم سایز متن
             }
-            button.text = ""
-            button.isEnabled = true
-            button.setBackgroundResource(R.drawable.default_button)
         }
     }
 
-    fun showFinalWinnerDialog(message: String) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.winner_dialogue)
+    private fun showFinalWinnerDialog(message: String) {
+        val dialog = Dialog(this).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(false)
+            setContentView(R.layout.winner_dialogue)
+        }
         dialog.findViewById<TextView>(R.id.winnerResult).text = message
         dialog.findViewById<Button>(R.id.exit).setOnClickListener {
-            val intent = Intent(this, ChooseModeActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ChooseModeActivity::class.java))
         }
         dialog.findViewById<Button>(R.id.againGame).setOnClickListener {
             finish()
-            startActivity(intent)
+            startActivity(Intent(this, twoPlayerGameActivity::class.java))
         }
         dialog.show()
     }
